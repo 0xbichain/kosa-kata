@@ -8,6 +8,15 @@ try {
     console.warn("kata.txt not found, falling back to basic list.");
 }
 
+let wordsFromRanking = [];
+try {
+    const rankingText = fs.readFileSync('ranking_kata (1).json', 'utf-8');
+    const rankingData = JSON.parse(rankingText);
+    wordsFromRanking = rankingData.map(item => item.word.trim().toLowerCase()).filter(w => w.length > 0 && !w.includes('-'));
+} catch (e) {
+    console.warn("ranking_kata (1).json not found or invalid.");
+}
+
 const hewan = [
     "anjing", "ayam", "babi", "badak", "banteng", "bebek", "belalang", "biawak", "buaya", "burung",
     "cacing", "cicak", "cumi", "domba", "elang", "entok", "gagak", "gajah", "gorila", "harimau",
@@ -34,7 +43,7 @@ const negara = [
 ];
 
 // combine and deduplicate
-const allWords = [...hewan, ...negara, ...wordsFromFile].map(w => w.toLowerCase());
+const allWords = [...hewan, ...negara, ...wordsFromFile, ...wordsFromRanking].map(w => w.toLowerCase());
 const uniqueWords = [...new Set(allWords)];
 uniqueWords.sort();
 

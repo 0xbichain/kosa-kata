@@ -27,11 +27,19 @@
         </header>
 
         <section class="search-section">
-            <div class="search-box">
-                <i class="ri-search-line search-icon"></i>
-                <input type="text" id="searchInput" placeholder="Ketik 1 - 3 huruf (misal: a, ik, is)..." maxlength="3"
-                    autocomplete="off" autofocus>
-                <button class="clear-btn" id="clearBtn"><i class="ri-close-line"></i></button>
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="ri-search-line search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Awalan 1 - 3 huruf (wajib)..." maxlength="3"
+                        autocomplete="off" autofocus>
+                    <button class="clear-btn" id="clearBtn"><i class="ri-close-line"></i></button>
+                </div>
+                <div class="search-box">
+                    <i class="ri-filter-3-line search-icon"></i>
+                    <input type="text" id="suffixInput" placeholder="Akhiran (pisahkan dgn koma, opsional)..." 
+                        autocomplete="off">
+                    <button class="clear-btn" id="clearSuffixBtn"><i class="ri-close-line"></i></button>
+                </div>
             </div>
         </section>
 

@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
+    const suffixInput = document.getElementById('suffixInput');
     const clearBtn = document.getElementById('clearBtn');
+    const clearSuffixBtn = document.getElementById('clearSuffixBtn');
     const resultsGrid = document.getElementById('resultsGrid');
     const initialState = document.getElementById('initialState');
     const emptyState = document.getElementById('emptyState');
@@ -38,6 +40,25 @@ document.addEventListener('DOMContentLoaded', () => {
         updateResults('');
     });
 
+    suffixInput.addEventListener('input', (e) => {
+        const rawValue = e.target.value;
+        if (rawValue.trim().length > 0) {
+            clearSuffixBtn.classList.add('visible');
+        } else {
+            clearSuffixBtn.classList.remove('visible');
+        }
+        const query = searchInput.value.toLowerCase().trim();
+        updateResults(query);
+    });
+
+    clearSuffixBtn.addEventListener('click', () => {
+        suffixInput.value = '';
+        suffixInput.focus();
+        clearSuffixBtn.classList.remove('visible');
+        const query = searchInput.value.toLowerCase().trim();
+        updateResults(query);
+    });
+
     function updateResults(query) {
         // Clear previous results
         resultsGrid.innerHTML = '';
@@ -54,8 +75,27 @@ document.addEventListener('DOMContentLoaded', () => {
         if (dictionaryData[query] && dictionaryData[query].length > 0) {
             emptyState.classList.add('hidden');
 
+            let results = dictionaryData[query];
+            const rawSuffixes = suffixInput.value;
+            const suffixes = rawSuffixes.split(',').map(s => s.trim().toLowerCase()).filter(s => s.length > 0);
+
+            if (suffixes.length > 0) {
+                const matching = [];
+                const nonMatching = [];
+                results.forEach(word => {
+                    // Check if the word ends with any of the requested suffixes
+                    if (suffixes.some(suffix => word.endsWith(suffix))) {
+                        matching.push(word);
+                    } else {
+                        nonMatching.push(word);
+                    }
+                });
+                // Sort matching first
+                results = [...matching, ...nonMatching];
+            }
+
             // Render results
-            dictionaryData[query].forEach((word, index) => {
+            results.forEach((word, index) => {
                 const card = document.createElement('div');
                 card.className = 'word-card';
                 card.style.animationDelay = `${index * 0.05}s`;

@@ -76,7 +76,7 @@ body {
 }
 
 .container {
-    max-width: 900px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 3rem 1.5rem;
     min-height: 100vh;
@@ -102,6 +102,7 @@ body {
     font-size: 2.5rem;
     background: linear-gradient(135deg, var(--primary-light), var(--secondary));
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -111,6 +112,7 @@ h1 {
     letter-spacing: -0.025em;
     background: linear-gradient(to right, #ffffff, #a5b4fc);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -130,7 +132,7 @@ h1 {
     position: relative;
     width: 100%;
     max-width: 600px;
-    margin: 0 auto;
+    margin: 0 auto 1rem auto;
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 99px;
@@ -223,8 +225,8 @@ h1 {
 
 .results-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
     margin-bottom: 2rem;
 }
 
@@ -293,6 +295,14 @@ h1 {
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+    .results-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .results-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
 @media (max-width: 640px) {
     h1 { font-size: 2.2rem; }
     .search-box input { padding: 0.8rem; font-size: 1.1rem; }
