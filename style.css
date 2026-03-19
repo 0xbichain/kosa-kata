@@ -128,11 +128,22 @@ h1 {
     animation: fadeIn 1s 0.3s both;
 }
 
+.search-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    justify-content: center;
+}
+
 .search-box {
     position: relative;
     width: 100%;
+    flex: 1 1 300px;
     max-width: 600px;
-    margin: 0 auto 1rem auto;
+    margin: 0;
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 99px;
